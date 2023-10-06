@@ -92,6 +92,7 @@ calculatorObj.operators.forEach((operator) => {
             }
             calculatorObj.num2 = '';
             calculatorScreen.textContent = calculatorObj.num1;
+            decimalPointAdded = false;
         }
 
         if (calculatorObj.num1) {
