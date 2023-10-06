@@ -127,6 +127,7 @@ calculatorObj.resetBtn.addEventListener('click', () => {
     calculatorObj.num2 = '';
     calculatorObj.perform = '';
     calculatorScreen.textContent = '0';
+    decimalPointAdded = false;
 })
 
 calculatorObj.deleteBtn.addEventListener('click', () => {
