@@ -35,8 +35,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 calculatorObj.numbers.forEach((num) => {
     num.addEventListener('click', () => {
-        let calculatorScreen = document.querySelector('.calculator__screen')
+        let calculatorScreen = document.querySelector('.calculator__screen');
         if (!calculatorObj.perform) {
+            if (calculatorObj.num1.length >= 9) {
+                return; // Limit reached, do nothing
+            }
+            if (num.textContent === "." && decimalPointAdded) {
+                return;
+            }
+            if (num.textContent === ".") {
+                decimalPointAdded = true;
+            }
+            calculatorObj.num1 += num.textContent;
+            calculatorScreen.textContent = calculatorObj.num1;
+        } else {
+            if (calculatorObj.num2.length >= 9) {
+                return; // Limit reached, do nothing
+            }
+            calculatorObj.operators.forEach((op) => {
+                op.classList.remove('selected');
+            });
 
             if (num.textContent === "." && decimalPointAdded) {
                 return;
@@ -44,25 +62,11 @@ calculatorObj.numbers.forEach((num) => {
             if (num.textContent === ".") {
                 decimalPointAdded = true;
             }
-            calculatorObj.num1 += num.textContent
-            calculatorScreen.textContent = calculatorObj.num1
-        } else {
-            calculatorObj.operators.forEach((op) => {
-                op.classList.remove('selected');
-            });
-
-            if (num.textContent === "." && decimalPointAdded) {
-                // Do nothing if a decimal point is already added
-                return;
-            }
-            if (num.textContent === ".") {
-                decimalPointAdded = true; // Set the flag when a decimal point is added
-            }
-            calculatorObj.num2 += num.textContent
-            calculatorScreen.textContent = calculatorObj.num2
+            calculatorObj.num2 += num.textContent;
+            calculatorScreen.textContent = calculatorObj.num2;
         }
-    })
-})
+    });
+});
 
 calculatorObj.operators.forEach((operator) => {
     operator.addEventListener('click', () => {
@@ -86,9 +90,9 @@ calculatorObj.operators.forEach((operator) => {
             }
 
             if (Number.isInteger(result)) {
-                calculatorObj.num1 = result.toString(); // Convert to string to remove decimal
+                calculatorObj.num1 = result.toString().slice(0, 9);
             } else {
-                calculatorObj.num1 = result.toFixed(2); // Keep two decimal places
+                calculatorObj.num1 = result.toFixed(2).slice(0, 9);
             }
             calculatorObj.num2 = '';
             calculatorScreen.textContent = calculatorObj.num1;
