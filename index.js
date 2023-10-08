@@ -140,6 +140,10 @@ calculatorObj.deleteBtn.addEventListener('click', () => {
         op.classList.remove('selected');
     });
 
+    if (calculatorObj.perform && !calculatorObj.num2) {
+        return; // If a calculation has been performed and num2 is empty, do nothing
+    }
+
     if (!calculatorObj.num2) {
         let calculatorScreen = document.querySelector('.calculator__screen');
         calculatorObj.perform = '';
