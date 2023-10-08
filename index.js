@@ -6,6 +6,7 @@ let calculatorObj = {
     operators: Array.from(document.querySelectorAll('.operator')),
     resetBtn: document.querySelector('.btn__reset'),
     deleteBtn: document.querySelector('.btn__delete'),
+    equalsBtn: document.querySelector('.btn__equal'),
     perform: '',
 }
 let decimalPointAdded = false;
